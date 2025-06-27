@@ -34,7 +34,6 @@ func (r *Runtime) Run(ctx context.Context, args []string) error {
 	cmd := exec.Command(r.opts.EnvoyPath, args...) // #nosec -> users can run whatever binary they like!
 	cmd.Stdout = r.Out
 	cmd.Stderr = r.Err
-	cmd.SysProcAttr = moreos.ProcessGroupAttr()
 	r.cmd = cmd
 
 	if err := r.ensureAdminAddressPath(); err != nil {

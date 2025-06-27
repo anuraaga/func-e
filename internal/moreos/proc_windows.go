@@ -28,12 +28,6 @@ const (
 	errorInvalidParameter = 87
 )
 
-func processGroupAttr() *syscall.SysProcAttr {
-	return &syscall.SysProcAttr{
-		CreationFlags: syscall.CREATE_NEW_PROCESS_GROUP, // Stop Ctrl-Break propagation to allow shutdown-hooks
-	}
-}
-
 // interrupt contains signal_windows_test.go sendCtrlBreak() as there's no main source with the same.
 func interrupt(p *os.Process) error {
 	pid := p.Pid

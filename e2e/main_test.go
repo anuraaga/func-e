@@ -167,7 +167,6 @@ type funcE struct {
 
 func newFuncE(ctx context.Context, args ...string) *funcE {
 	cmd := exec.CommandContext(ctx, funcEBin, args...)
-	cmd.SysProcAttr = moreos.ProcessGroupAttr()
 	return &funcE{cmd: cmd}
 }
 

@@ -125,10 +125,9 @@ func TestSprintf_IdiomaticPerOS(t *testing.T) {
 	require.Equal(t, Sprintf("cats\n"), stdout.String())
 }
 
-func TestProcessGroupAttr_Interrupt(t *testing.T) {
+func TestProcess_Interrupt(t *testing.T) {
 	// Fork a process that hangs
 	cmd := exec.Command("cat" + Exe)
-	cmd.SysProcAttr = ProcessGroupAttr()
 	require.NoError(t, cmd.Start())
 
 	// Verify the process exists
@@ -148,7 +147,6 @@ func TestProcessGroupAttr_Interrupt(t *testing.T) {
 func Test_EnsureProcessDone(t *testing.T) {
 	// Fork a process that hangs
 	cmd := exec.Command("cat" + Exe)
-	cmd.SysProcAttr = ProcessGroupAttr()
 	require.NoError(t, cmd.Start())
 
 	// Kill it

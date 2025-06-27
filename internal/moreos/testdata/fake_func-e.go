@@ -44,7 +44,6 @@ func main() {
 func run(ctx context.Context, args []string) error {
 	// Like envoy.GetHomeVersion, $FUNC_E_HOME/versions/$(cat $FUNC_E_HOME/version)/bin/envoy$GOEXE.
 	cmd := exec.Command(os.Getenv("ENVOY_PATH"), args...)
-	cmd.SysProcAttr = moreos.ProcessGroupAttr()
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 

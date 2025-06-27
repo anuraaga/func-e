@@ -21,7 +21,6 @@ import (
 	"os"
 	"runtime"
 	"strings"
-	"syscall"
 )
 
 const (
@@ -102,12 +101,6 @@ func Fprintf(w io.Writer, format string, a ...interface{}) {
 	}
 
 	_, _ = fmt.Fprint(w, Sprintf(format, a...))
-}
-
-// ProcessGroupAttr sets attributes that ensure exec.Cmd doesn't propagate signals from func-e by default.
-// This is used to ensure shutdown hooks can apply
-func ProcessGroupAttr() *syscall.SysProcAttr {
-	return processGroupAttr() // un-exported to prevent godoc drift
 }
 
 // Interrupt attempts to interrupt the process. It doesn't necessarily kill it.

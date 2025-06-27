@@ -40,7 +40,7 @@ var (
 
 	// Include the source imported by fakeFuncESrc directly and indirectly
 	// We can't use wildcards because golang/go#48348 declined adding support for {{goos}} variables
-	//go:embed moreos.go proc.go proc_attr_darwin.go proc_attr_linux.go proc_windows.go
+	//go:embed moreos.go proc.go
 	moreosSrcDir embed.FS
 )
 
@@ -102,7 +102,6 @@ func Test_CallSignals(t *testing.T) {
 			// With an arg so fakeFuncE runs fakeEnvoy as its child and doesn't exit.
 			arg := "1.1.1" // version.LastKnownEnvoy would introduce an import cycle
 			cmd := exec.Command(fakeFuncE, "run", arg, "-c")
-			cmd.SysProcAttr = ProcessGroupAttr() // Make sure we have a new process group.
 			cmd.Stdout = stdout
 
 			stderr, err := cmd.StderrPipe()
@@ -152,7 +151,7 @@ func Test_CallSignals(t *testing.T) {
 }
 
 // requireFakeFuncE builds a func-e binary only depends on fakeFuncESrc and the sources in this package.
-// This is used to test integrated use of tools like ProcessGroupAttr without mixing unrelated concerns or dependencies.
+// This is used to test integrated use of tools without mixing unrelated concerns or dependencies.
 func requireFakeFuncE(t *testing.T, path string) {
 	workDir := t.TempDir()
 

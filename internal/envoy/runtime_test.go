@@ -118,7 +118,6 @@ func TestString(t *testing.T) {
 	// Fork a process that hangs
 	cmdRunning := NewRuntime(&globals.RunOpts{})
 	cmdRunning.cmd = exec.Command("cat" + moreos.Exe)
-	cmdRunning.cmd.SysProcAttr = moreos.ProcessGroupAttr()
 	require.NoError(t, cmdRunning.cmd.Start())
 	defer cmdRunning.cmd.Process.Kill()
 
